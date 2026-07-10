@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Apps & Tools | Maduranga</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <!-- FontAwesome Icons සඳහා -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Apps Page එකටම විශේෂිත CSS */
+        .apps-page {
+            padding: 120px 20px 60px;
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+        .apps-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .back-btn {
+            color: var(--accent-color);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            transition: 0.3s;
+        }
+        .back-btn:hover {
+            transform: translateX(-5px);
+        }
+        .apps-title {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+        }
+        .apps-title span {
+            color: var(--accent-color);
+        }
+        .apps-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 50px;
+        }
+        
+        /* Apps Grid Layout */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        .app-card {
+            background: rgba(var(--card-rgb), 0.6);
+            border: 1px solid rgba(var(--overlay-rgb), 0.04);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .app-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 25px rgba(255, 74, 87, 0.05);
+        }
+        .app-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        .app-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--text-color);
+        }
+        .app-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        .launch-btn {
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 74, 87, 0.2);
+        }
+        .launch-btn:hover {
+            background: #e03e4a;
+            box-shadow: 0 4px 20px rgba(255, 74, 87, 0.4);
+        }
+        .tech-badge {
+            background: rgba(var(--overlay-rgb), 0.03);
+            border: 1px solid rgba(var(--overlay-rgb), 0.08);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            display: inline-block;
+            width: fit-content;
+        }
+    </style>
+</head>
+<body>
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark and light mode">
+        <i class="fa-solid fa-moon"></i>
+        <i class="fa-solid fa-sun"></i>
+    </button>
+
+    <div class="apps-page">
+        <div class="apps-container">
+            
+            <a href="../index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+            
+            <h1 class="apps-title">My Web <span>Apps & Tools</span></h1>
+            <p class="apps-subtitle">මා විසින් නිර්මාණය කරන ලද ප්‍රයෝජනවත් Web Applications මෙතැනින් Live භාවිත කරන්න.</p>
+            
+            <!-- Apps Grid -->
+            <div class="apps-grid">
+                
+                <!-- APP 1: Live Instrument Tuner -->
+                <div class="app-card">
+                    <div>
+                        <div class="app-icon"><i class="fa-solid fa-tuning-fork"></i></div>
+                        <h3>MsD Instrument Tuner</h3>
+                        <span class="tech-badge">Web Audio API</span>
+                        <p>මයික්‍රෆෝනය භාවිතයෙන් ඔබේ ගිටාර්, වයලීන්, හෝ වෙනත් ඕනෑම සංගීත භාණ්ඩයක් සජීවීව සහ නිවැරදිව Tune කරගන්න.</p>
+                    </div>
+                    <a href="tuner.html" class="launch-btn">Launch Tuner <i class="fa-solid fa-rocket"></i></a>
+                </div>
+
+                <!-- APP 2: Future BPM Counter / Metronome (Example) -->
+                <div class="app-card" style="opacity: 0.6;">
+                    <div>
+                        <div class="app-icon"><i class="fa-solid fa-metronome"></i></div>
+                        <h3>BPM Counter & Metronome</h3>
+                        <span class="tech-badge">JavaScript Tool</span>
+                        <p>සංගීත නිර්මාණ කටයුතු වලදී නිවැරදි Tempo (BPM) එක බලාගැනීමට සහ Track කිරීමට උදව් වන සරල මෙවලමක්.</p>
+                    </div>
+                    <a href="#" class="launch-btn" style="background: #222; cursor: not-allowed; box-shadow: none;">Coming Soon</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-socials">
+            <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/94000000000" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <p class="footer-copy">&copy; 2026 M69 G development studio <span class="heart">&hearts;</span>. All Rights Reserved.</p>
+    </footer>
+
+    <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

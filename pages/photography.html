@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography Gallery | Maduranga</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        .gallery-section { margin-top: 50px; }
+        .gallery-section h2 { font-size: 1.8rem; margin-bottom: 20px; color: var(--text-color); border-left: 4px solid var(--accent-color); padding-left: 10px; }
+        
+        /* Album Card Styling */
+        .portrait-album-card {
+            background-color: var(--card-bg);
+            padding: 35px 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(var(--overlay-rgb),0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        .album-info h3 { font-size: 1.5rem; margin-bottom: 8px; font-weight: 600; }
+        .album-info p { color: var(--text-muted); font-size: 0.95rem; }
+        
+        .view-btn {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .view-btn:hover {
+            opacity: 0.9;
+            box-shadow: 0 5px 25px rgba(255, 74, 87, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-bottom: 50px; }
+        .gallery-item { width: 100%; height: 380px; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.5); position: relative; border: 1px solid rgba(var(--overlay-rgb),0.02); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s ease; }
+        .gallery-item:hover img { transform: scale(1.05); }
+
+        @media (max-width: 576px) {
+            .portrait-album-card { flex-direction: column; text-align: center; gap: 20px; padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark and light mode">
+        <i class="fa-solid fa-moon"></i>
+        <i class="fa-solid fa-sun"></i>
+    </button>
+    <!-- ලෝගෝ එක සහිත LOADING SCREEN එක -->
+    <div class="loader-wrapper" id="preloader">
+        <div class="loader-logo-container">
+            <div class="loader-ring"></div>
+            <i class="fa-solid fa-camera"></i>
+        </div>
+        <div class="loader-text">Maduranga<span>.</span></div>
+    </div>
+
+
+
+
+
+
+
+    <div class="sub-container">
+        <a href="../index.html#services" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+        <h1>Photography <span>Portfolios</span></h1>
+        <p class="sub-desc">මගේ කැමරා ඇසට හසුකරගත් ලස්සනම ඡායාරූප සහ ඇල්බම එකතුව.</p>
+        
+        <!-- SECTION 1: MY PORTRAITS (මෙතනින් අලුත් පේජ් එකට ලින්ක් කරා) -->
+        <div class="gallery-section">
+            <h2>Featured Album</h2>
+            <div class="portrait-album-card">
+                <div class="album-info">
+                    <h3>My Portraits</h3>
+                    <p>මගේ තනි පින්තූර (Personal Portraits) එකතුව වෙනමම පිටුවකින් නැරඹීමට පහත බටන් එක ක්ලික් කරන්න.</p>
+                </div>
+                <!-- මේ බටන් එකෙන් අලුතින් හදන my-portraits.html පිටුවට යනවා -->
+                <a href="my-portraits.html" class="view-btn">View Album <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- SECTION 2: GENERAL GALLERY (ඔයාගේ කලින් තිබ්බ පින්තූර ටික) -->
+        <div class="gallery-section">
+            <h2>General Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="../assets/images/g1.jpg" alt="Photography Work 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="../assets/images/g1.jpg" alt="Photography Work 2">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+    <footer class="site-footer">
+        <div class="footer-socials">
+            <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/94000000000" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <p class="footer-copy">&copy; 2026 M69 G development studio <span class="heart">&hearts;</span>. All Rights Reserved.</p>
+    </footer>
+
+    <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

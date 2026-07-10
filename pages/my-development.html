@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Development Projects | Maduranga</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Development Page එකටම විශේෂිත සරල CSS */
+        .dev-page {
+            padding: 120px 20px 60px;
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+        .dev-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .back-btn {
+            color: var(--accent-color);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            transition: 0.3s;
+        }
+        .back-btn:hover {
+            transform: translateX(-5px);
+        }
+        .dev-title {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+        }
+        .dev-title span {
+            color: var(--accent-color);
+        }
+        .dev-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 50px;
+        }
+        /* Projects Grid Layout */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        .project-card {
+            background: rgba(var(--card-rgb), 0.6);
+            border: 1px solid rgba(var(--overlay-rgb), 0.04);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 25px rgba(255, 74, 87, 0.05);
+        }
+        .project-icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        .project-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--text-color);
+        }
+        .project-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .tech-tag {
+            background: rgba(var(--overlay-rgb), 0.03);
+            border: 1px solid rgba(var(--overlay-rgb), 0.08);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: var(--text-color);
+        }
+    </style>
+</head>
+<body>
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark and light mode">
+        <i class="fa-solid fa-moon"></i>
+        <i class="fa-solid fa-sun"></i>
+    </button>
+
+    <div class="dev-page">
+        <div class="dev-container">
+            
+            <a href="../index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+            
+            <h1 class="dev-title">My <span>Development</span> Works</h1>
+            <p class="dev-subtitle">මම නිර්මාණය කරපු මෘදුකාංග (Software) සහ වෙබ් අඩවි එකතුව මෙතැනින් බලන්න පුළුවන්.</p>
+            
+            <div class="projects-grid">
+                
+                <div class="project-card">
+                    <div class="project-icon"><i class="fa-solid fa-tuning-fork"></i></div>
+                    <h3>Music Instrument Tuner</h3>
+                    <p>සංගීත භාණ්ඩ නිවැරදිව Tune කරගැනීම සඳහා Flutter තාක්ෂණයෙන් ජංගම දුරකථන සහ පරිගණක සඳහා නිර්මාණය කළ Application එකක්.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Flutter</span>
+                        <span class="tech-tag">Dart</span>
+                        <span class="tech-tag">Audio DSP</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon"><i class="fa-solid fa-globe"></i></div>
+                    <h3>Personal Portfolio Website</h3>
+                    <p>ඡායාරූප ශිල්පීන් සහ සංගීත ශිල්පීන් වෙනුවෙන් නිර්මාණය කරන ලද Responsive නිල වෙබ් අඩවිය.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                    <h3>Upcoming Project</h3>
+                    <p>නව නිර්මාණයක් ළඟදීම බලාපොරොත්තු වන්න...</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">In Progress</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-socials">
+            <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/94000000000" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <p class="footer-copy">&copy; 2026 M69 G development studio <span class="heart">&hearts;</span>. All Rights Reserved.</p>
+    </footer>
+
+    <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

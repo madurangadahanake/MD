@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MsD Ultimate Instrument Tuner | Maduranga</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 🌌 BACKGROUND & CANVAS STYLE */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            overflow-x: hidden;
+            font-family: sans-serif;
+        }
+        #starCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; /* ටියුනර් එකට පිටුපසින් තරු පෙනීමට */
+            pointer-events: none;
+        }
+
+        .tuner-page {
+            padding: 40px 20px;
+            min-height: 100vh;
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        .tuner-container {
+            max-width: 580px;
+            width: 100%;
+            background: rgba(var(--card-rgb), 0.75); /* තරු ලස්සනට පෙනෙන්න ටිකක් transparent කළා */
+            border: 1px solid rgba(var(--overlay-rgb), 0.06);
+            backdrop-filter: blur(8px); /* Glassmorphism look */
+            border-radius: 24px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+        }
+        
+        /* 🔙 BACK BUTTON STYLE */
+        .back-btn {
+            color: var(--accent-color);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+        .back-btn:hover { transform: translateX(-5px); color: var(--accent-color); }
+
+        /* 🎛️ Mode Toggle Switch */
+        .mode-container {
+            display: flex;
+            background: rgba(var(--overlay-rgb), 0.03);
+            padding: 6px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(var(--overlay-rgb),0.05);
+        }
+        .mode-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+        .mode-btn.active {
+            background: var(--accent-color);
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(255, 74, 87, 0.2);
+        }
+
+        /* Dropdowns & Selectors Layouts */
+        .panel { display: none; }
+        .panel.active { display: block; }
+        
+        .selector-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            text-align: left;
+            margin-top: 15px;
+        }
+        
+        .dropdown-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .dropdown-group.three-cols {
+            grid-template-columns: 1.2fr 1.2fr 1fr;
+        }
+        select {
+            background: rgba(var(--card-rgb), 0.6);
+            border: 1px solid rgba(var(--overlay-rgb),0.1);
+            color: var(--text-color);
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            width: 100%;
+        }
+        select:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .btn-group {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .btn-group.accidental { grid-template-columns: repeat(3, 1fr); }
+        .btn-group.octave { grid-template-columns: repeat(9, 1fr); }
+        .btn-group.strings { grid-template-columns: repeat(4, 1fr); }
+
+        .select-btn {
+            background: rgba(var(--overlay-rgb), 0.05);
+            border: 1px solid rgba(var(--overlay-rgb), 0.1);
+            color: var(--text-color);
+            padding: 12px 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            font-size: 0.85rem;
+        }
+        .select-btn:hover { background: rgba(var(--overlay-rgb), 0.15); }
+        .select-btn.active {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(255, 74, 87, 0.4);
+        }
+
+        /* Tuner Display UI */
+        .display-card {
+            background: rgba(var(--overlay-rgb), 0.02);
+            padding: 20px;
+            border-radius: 16px;
+            margin: 25px 0;
+            border: 1px solid rgba(var(--overlay-rgb),0.02);
+        }
+        .mode-title {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: bold;
+        }
+        .note-display {
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--text-color);
+            margin: 10px 0;
+            text-shadow: 0 0 20px rgba(var(--overlay-rgb), 0.1);
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .sub-details {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+            min-height: 24px;
+        }
+        .distance-text {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 8px;
+            color: #ffaa00;
+            min-height: 22px;
+        }
+
+        /* Tuner Meter Gauge */
+        .meter-container {
+            position: relative;
+            width: 100%;
+            height: 20px;
+            background: rgba(var(--overlay-rgb),0.05);
+            border-radius: 10px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        .meter-pointer {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 6px;
+            height: 100%;
+            background: var(--accent-color);
+            transition: left 0.1s ease;
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+        .meter-center {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: #00ff66;
+            transform: translateX(-50%);
+        }
+
+        .status-text {
+            font-size: 1.1rem;
+            color: #00ff66;
+            font-weight: 600;
+            margin-bottom: 25px;
+            height: 25px;
+        }
+        .start-btn {
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 74, 87, 0.3);
+            width: 100%;
+        }
+        .start-btn:hover { background: #e03e4a; }
+    </style>
+</head>
+<body>
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark and light mode">
+        <i class="fa-solid fa-moon"></i>
+        <i class="fa-solid fa-sun"></i>
+    </button>
+
+    <canvas id="starCanvas"></canvas>
+
+    <div class="tuner-page">
+        <div class="tuner-container">
+            <a href="my-development.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to My Web Apps & Tools</a>
+            
+            <h2>MsD Ultimate Tuner</h2>
+            
+            <div class="mode-container">
+                <button class="mode-btn active" data-mode="auto">AUTO MODE</button>
+                <button class="mode-btn" data-mode="manual">MANUAL MODE</button>
+                <button class="mode-btn" data-mode="instrument">INSTRUMENTS</button>
+            </div>
+            
+            <div id="autoPanel" class="panel active"></div>
+
+            <div id="manualPanel" class="panel">
+                <div class="selector-label">1. Select Target Note</div>
+                <div class="btn-group" id="noteSelector">
+                    <button class="select-btn active" data-note="C">C</button>
+                    <button class="select-btn" data-note="D">D</button>
+                    <button class="select-btn" data-note="E">E</button>
+                    <button class="select-btn" data-note="F">F</button>
+                    <button class="select-btn" data-note="G">G</button>
+                    <button class="select-btn" data-note="A">A</button>
+                    <button class="select-btn" data-note="B">B</button>
+                </div>
+                <div class="selector-label">2. Accidental (# / b)</div>
+                <div class="btn-group accidental" id="accidentalSelector">
+                    <button class="select-btn active" data-acc="">Natural</button>
+                    <button class="select-btn" data-acc="#">Sharp (#)</button>
+                    <button class="select-btn" data-acc="b">Flat (b)</button>
+                </div>
+                <div class="selector-label">3. Select Octave</div>
+                <div class="btn-group octave" id="octaveSelector">
+                    <button class="select-btn" data-octave="0">0</button>
+                    <button class="select-btn" data-octave="1">1</button>
+                    <button class="select-btn" data-octave="2">2</button>
+                    <button class="select-btn" data-octave="3">3</button>
+                    <button class="select-btn active" data-octave="4">4</button>
+                    <button class="select-btn" data-octave="5">5</button>
+                    <button class="select-btn" data-octave="6">6</button>
+                    <button class="select-btn" data-octave="7">7</button>
+                    <button class="select-btn" data-octave="8">8</button>
+                </div>
+            </div>
+
+            <div id="instrumentPanel" class="panel">
+                <div class="dropdown-group three-cols">
+                    <div>
+                        <div class="selector-label">Instrument</div>
+                        <select id="instSelect">
+                            <option value="violin">Violin (වයලින්)</option>
+                            <option value="guitar">Guitar (ගිටාර්)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <div class="selector-label">Tuning Style</div>
+                        <select id="styleSelect">
+                            </select>
+                    </div>
+                    <div>
+                        <div class="selector-label">Base Pitch (Sa)</div>
+                        <select id="pitchSelect">
+                            <option value="C">C</option>
+                            <option value="C#">C#</option>
+                            <option value="D">D</option>
+                            <option value="D#" selected>D#</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="F#">F#</option>
+                            <option value="G">G</option>
+                            <option value="G#">G#</option>
+                            <option value="A">A</option>
+                            <option value="A#">A#</option>
+                            <option value="B">B</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="selector-label">Select String / තන්තුව</div>
+                <div class="btn-group strings" id="stringSelector">
+                    </div>
+            </div>
+
+            <div class="display-card">
+                <div class="mode-title" id="displayModeTitle">Auto Detecting</div>
+                <div class="note-display" id="note">-</div>
+                
+                <div class="sub-details" id="subDetails">Current: - | 0.00 Hz</div>
+                <div class="distance-text" id="distanceText"></div>
+            </div>
+            
+            <div class="meter-container">
+                <div class="meter-center"></div>
+                <div class="meter-pointer" id="pointer"></div>
+            </div>
+            
+            <div class="status-text" id="status">Click Start to Tune</div>
+            <button class="start-btn" id="startBtn">Start Tuner</button>
+        </div>
+    </div>
+
+    
+    <footer class="site-footer">
+        <div class="footer-socials">
+            <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/94000000000" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <p class="footer-copy">&copy; 2026 M69 G development studio <span class="heart">&hearts;</span>. All Rights Reserved.</p>
+    </footer>
+
+    <script src="../assets/js/main.js" defer></script>
+    <script src="../assets/js/tuner.js" defer></script>
+</body>
+</html>

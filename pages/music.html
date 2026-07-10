@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music & Violin Portfolio | Maduranga</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- External Shared Style -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        /* මුළු පේජ් එකම කවර් වෙන විදිහට බැක්ග්‍රවුන්ඩ් එක වෙනම Wrapper එකකට දීම */
+        .page-bg-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(10, 10, 15, 0.82), rgba(10, 10, 15, 0.82)), url('mbg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -1; /* මේක තියෙන්නේ අකුරු සහ කාඩ්ස් වලට යටින් */
+            pointer-events: none;
+        }
+
+        /* Content ටික ලස්සනට මැදින් තියාගන්න */
+        .sub-container {
+            position: relative;
+            z-index: 1;
+            background: transparent !important; /* පසුබිම පෙනෙන්න container එක transparent කරා */
+        }
+
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 30px; 
+            margin-top: 40px; 
+        }
+        
+        .portfolio-card { 
+            background-color: rgba(25, 25, 35, 0.75) !important; /* පින්තූරේ උඩින් කාඩ් එක ලස්සනට කැපී පේන්න */
+            padding: 25px; 
+            border-radius: 15px; 
+            border: 1px solid rgba(var(--overlay-rgb),0.05); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+        
+        .portfolio-card h3 { 
+            margin-bottom: 15px; 
+        }
+        
+        audio { 
+            width: 100%; 
+            margin-top: 15px; 
+        }
+    </style>
+</head>
+<body>
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark and light mode">
+        <i class="fa-solid fa-moon"></i>
+        <i class="fa-solid fa-sun"></i>
+    </button>
+    <!-- ලෝගෝ එක සහිත LOADING SCREEN එක -->
+    <div class="loader-wrapper" id="preloader">
+        <div class="loader-logo-container">
+            <div class="loader-ring"></div>
+            <i class="fa-solid fa-music"></i>
+        </div>
+        <div class="loader-text">Maduranga<span>.</span></div>
+    </div>
+
+
+
+    <!-- අලුතෙන් දාපු Background Wrapper එක -->
+    <div class="page-bg-wrapper"></div>
+
+    <div class="sub-container">
+        <a href="../index.html#services" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+        <h1>Music & <span>Violin Covers</span></h1>
+        <p class="sub-desc">මම කරපු සංගීත නිර්මාණ සහ වයලීන වාදනයන් මෙතැනින් අහන්න පුළුවන්.</p>
+        
+        <div class="grid">
+            <div class="portfolio-card">
+                <h3>Violin Cover - Track 1</h3>
+                <audio controls src="track1.mp3"></audio>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <footer class="site-footer">
+        <div class="footer-socials">
+            <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/94000000000" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <p class="footer-copy">&copy; 2026 M69 G development studio <span class="heart">&hearts;</span>. All Rights Reserved.</p>
+    </footer>
+
+    <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

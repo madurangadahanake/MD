@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Editing Projects | Maduranga</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        .edit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 40px; }
+        .edit-card { background-color: var(--card-bg); padding: 20px; border-radius: 15px; border: 1px solid rgba(var(--overlay-rgb),0.03); backdrop-filter: blur(10px); }
+        .video-box { position: relative; padding-bottom: 56.25%; height: 0; margin-top: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+        .video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark and light mode">
+        <i class="fa-solid fa-moon"></i>
+        <i class="fa-solid fa-sun"></i>
+    </button>
+    <!-- ලෝගෝ එක සහිත LOADING SCREEN එක -->
+    <div class="loader-wrapper" id="preloader">
+        <div class="loader-logo-container">
+            <div class="loader-ring"></div>
+            <i class="fa-solid fa-film"></i>
+        </div>
+        <div class="loader-text">Maduranga<span>.</span></div>
+    </div>
+
+
+    <div class="sub-container">
+        <a href="../index.html#services" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+        <h1>Video <span>Editing Works</span></h1>
+        <p class="sub-desc">Transitions, color grading, and dynamic audio-visual synched edits.</p>
+        <div class="edit-grid">
+            <div class="edit-card">
+                <h3>YouTube / FB Video Project</h3>
+                <div class="video-box">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-socials">
+            <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/94000000000" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <p class="footer-copy">&copy; 2026 M69 G development studio <span class="heart">&hearts;</span>. All Rights Reserved.</p>
+    </footer>
+
+    <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

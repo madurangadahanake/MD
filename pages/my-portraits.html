@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portraits | Maduranga</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../assets/css/style.css">
+    
+    <style>
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
+        .gallery-item { width: 100%; height: 450px; border-radius: 16px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.6); position: relative; border: 1px solid rgba(var(--overlay-rgb),0.03); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .gallery-item:hover img { transform: scale(1.06); }
+    </style>
+</head>
+<body>
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark and light mode">
+        <i class="fa-solid fa-moon"></i>
+        <i class="fa-solid fa-sun"></i>
+    </button>
+    <!-- ලෝගෝ එක සහිත LOADING SCREEN එක -->
+    <div class="loader-wrapper" id="preloader">
+        <div class="loader-logo-container">
+            <div class="loader-ring"></div>
+            <i class="fa-solid fa-music"></i>
+        </div>
+        <div class="loader-text">Maduranga<span>.</span></div>
+    </div>
+
+
+    <div class="sub-container">
+        <a href="photography.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Photography</a>
+        
+        <h1>My <span>Portraits</span></h1>
+        <p class="sub-desc">මගේ තනි පින්තූර (Personal Portraits) එකතුව මෙතැනින් බලන්න පුළුවන්.</p>
+        
+        <div class="gallery-grid">
+            <!-- ඔයාගේ පළවෙනි පින්තූරය -->
+            <div class="gallery-item">
+                <img src="../assets/images/g1.jpg" alt="Maduranga Portrait 1">
+            </div>
+            
+            <!-- ඔයාගේ දෙවෙනි පින්තූරය -->
+            <div class="gallery-item">
+                <img src="../assets/images/g1.jpg" alt="Maduranga Portrait 2">
+            </div>
+            
+            <!-- ඔයාගේ තුන්වෙනි පින්තූරය -->
+            <div class="gallery-item">
+                <img src="../assets/images/g.jpg" alt="Maduranga Portrait 3">
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="site-footer">
+        <div class="footer-socials">
+            <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/94000000000" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <p class="footer-copy">&copy; 2026 M69 G development studio <span class="heart">&hearts;</span>. All Rights Reserved.</p>
+    </footer>
+
+    <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

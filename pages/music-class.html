@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MsD Music Academy | Maduranga</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <!-- FontAwesome Icons සඳහා -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Music Class Page CSS */
+        .class-page {
+            padding: 120px 20px 60px;
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+        .class-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .back-btn {
+            color: var(--accent-color);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            transition: 0.3s;
+        }
+        .back-btn:hover {
+            transform: translateX(-5px);
+        }
+        .class-title {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+        }
+        .class-title span {
+            color: var(--accent-color);
+        }
+        .class-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 50px;
+        }
+        
+        /* Classes Grid Layout */
+        .class-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .class-card {
+            background: rgba(var(--card-rgb), 0.6);
+            border: 1px solid rgba(var(--overlay-rgb), 0.04);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        .class-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 25px rgba(255, 74, 87, 0.05);
+        }
+        .class-icon {
+            font-size: 2.2rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        .class-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--text-color);
+        }
+        .class-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .class-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 25px 0;
+        }
+        .class-features li {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .class-features li i {
+            color: var(--accent-color);
+        }
+        .enroll-btn {
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .enroll-btn:hover {
+            background: #e03e4a;
+        }
+
+        /* 🌟 NEW: CLASS POSTS GALLERY STYLING 🌟 */
+        .posts-section-title {
+            font-size: 2rem;
+            margin: 40px 0 20px;
+            color: var(--text-color);
+            border-left: 4px solid var(--accent-color);
+            padding-left: 15px;
+        }
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .post-card {
+            background: rgba(var(--card-rgb), 0.4);
+            border: 1px solid rgba(var(--overlay-rgb), 0.04);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        .post-card:hover {
+            transform: scale(1.02);
+            border-color: rgba(255, 74, 87, 0.4);
+        }
+        .post-img-wrapper {
+            position: relative;
+            width: 100%;
+            height: 350px; /* පෝස්ට් එකේ උස */
+            overflow: hidden;
+            background: rgba(var(--card-rgb), 0.6);
+        }
+        .post-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s ease;
+        }
+        .post-card:hover .post-img-wrapper img {
+            transform: scale(1.08);
+        }
+        /* පෝස්ට් එක උඩට මූසිකය ගෙනිච්චම වැටෙන Overlay එක */
+        .post-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(var(--bg-rgb), 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: 0.3s;
+        }
+        .post-card:hover .post-overlay {
+            opacity: 1;
+        }
+        .view-icon {
+            color: var(--text-color);
+            font-size: 1.8rem;
+            background: var(--accent-color);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 15px rgba(255, 74, 87, 0.4);
+            cursor: pointer;
+        }
+        .post-details {
+            padding: 20px;
+        }
+        .post-details h4 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+        .download-post-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(var(--overlay-rgb), 0.03);
+            border: 1px solid rgba(var(--overlay-rgb), 0.08);
+            color: var(--text-muted);
+            padding: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        .post-card:hover .download-post-btn {
+            background: transparent;
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark and light mode">
+        <i class="fa-solid fa-moon"></i>
+        <i class="fa-solid fa-sun"></i>
+    </button>
+
+    <div class="class-page">
+        <div class="class-container">
+            
+            <a href="../index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+            
+            <h1 class="class-title">MD <span>Music Academy</span></h1>
+            <p class="class-subtitle">ඔබේ සංගීත සිහිනය සැබෑ කරගන්න, ප්‍රවීණ මඟපෙන්වීමක් සමඟින් අදම එකතු වන්න.</p>
+            
+            <!-- Classes Cards Grid -->
+            <div class="class-grid">
+                <!-- Violin Class -->
+                <div class="class-card">
+                    <div class="class-icon"><i class="fa-solid fa-music"></i></div>
+                    <h3>Violin Training Class</h3>
+                    <p>මුල සිට සරලව වයලීන වාදනය සහ බටහිර/පෙරදිග සංගීත න්‍යායන් ප්‍රායෝගිකව උගන්වනු ලැබේ.</p>
+                    <ul class="class-features">
+                        <li><i class="fa-solid fa-check"></i> Beginners to Advanced</li>
+                        <li><i class="fa-solid fa-check"></i> Individual Attention</li>
+                        <li><i class="fa-solid fa-check"></i> Practical & Theory</li>
+                    </ul>
+                    <a href="../index.html#contact" class="enroll-btn">Join Class</a>
+                </div>
+
+                <!-- Percussion Class -->
+                <div class="class-card">
+                    <div class="class-icon"><i class="fa-solid fa-drum"></i></div>
+                    <h3>Percussion & Tabla Class</h3>
+                    <p>තබ්ලා වාදනය, ගැටබෙර, පහතරට බෙර ඇතුළු දේශීය සහ විදේශීය වාදන භාණ්ඩ නිවැරදි තාල රටාවන්ට අනුව ඉගැන්වීම.</p>
+                    <ul class="class-features">
+                        <li><i class="fa-solid fa-check"></i> Indian Classical Theory (Raags)</li>
+                        <li><i class="fa-solid fa-check"></i> Traditional Rhythm Patterns</li>
+                        <li><i class="fa-solid fa-check"></i> Flexible Schedules</li>
+                    </ul>
+                    <a href="../index.html#contact" class="enroll-btn">Join Class</a>
+                </div>
+            </div>
+
+            <!-- 🌟 මෙන්න අලුතින්ම එකතු කරපු CLASS POSTS SECTION එක 🌟 -->
+            <h2 class="posts-section-title">Latest Class Flyers & Notices</h2>
+            
+            <div class="posts-grid">
+                
+                <!-- Post 1: Violin New Batch -->
+                <div class="post-card">
+                    <div class="post-img-wrapper">
+                        <!-- ⚠️ ඔයාගේ පෝස්ට් එකේ ඉමේජ් ලින්ක් එක (eg: violin-post.jpg) src="" එකට දාන්න -->
+                        <img src="../assets/images/violin-post.png" alt="Violin Class New Batch">
+                        <div class="post-overlay">
+                            <div class="view-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        </div>
+                    </div>
+                    <div class="post-details">
+                        <h4>Violin Class - New Batch 2026</h4>
+                        <a href="../assets/images/violin-post.png" download class="download-post-btn">
+                            <i class="fa-solid fa-download"></i> Download Poster
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Post 2: Traditional Drumming Notice -->
+                <div class="post-card">
+                    <div class="post-img-wrapper">
+                        <!-- ⚠️ බෙර පංතියේ පෝස්ට් එකේ ඉමේජ් ලින්ක් එක src="" එකට දාන්න -->
+                        <img src="../assets/images/pm2png.png" alt="Traditional Drumming Workshop">
+                        <div class="post-overlay">
+                            <div class="view-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        </div>
+                    </div>
+                    <div class="post-details">
+                        <h4>Traditional Drumming Workshop</h4>
+                        <a href="../assets/images/pm2png.png" download class="download-post-btn">
+                            <i class="fa-solid fa-download"></i> Download Poster
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Post 3: Online Theory Session -->
+                <div class="post-card">
+                    <div class="post-img-wrapper">
+                        <!-- ⚠️ තුන්වෙනි පෝස්ට් එකේ ඉමේජ් ලින්ක් එක src="" එකට දාන්න -->
+                        <img src="../assets/images/pm.jpeg" alt="Music Theory Special Class">
+                        <div class="post-overlay">
+                            <div class="view-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                        </div>
+                    </div>
+                    <div class="post-details">
+                        <h4>Sangeet Visharad Theory Class</h4>
+                        <a href="../assets/images/pm.jpeg" download class="download-post-btn">
+                            <i class="fa-solid fa-download"></i> Download Poster
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            <!-- 🌟 END OF POSTS SECTION 🌟 -->
+
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-socials">
+            <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/94000000000" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <p class="footer-copy">&copy; 2026 M69 G development studio <span class="heart">&hearts;</span>. All Rights Reserved.</p>
+    </footer>
+
+    <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

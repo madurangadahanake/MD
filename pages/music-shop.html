@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MsD Music Shop | Maduranga</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <!-- FontAwesome Icons සඳහා -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Music Shop Page එකටම විශේෂිත CSS */
+        .shop-page {
+            padding: 120px 20px 60px;
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+        .shop-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .back-btn {
+            color: var(--accent-color);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            transition: 0.3s;
+        }
+        .back-btn:hover {
+            transform: translateX(-5px);
+        }
+        .shop-title {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+        }
+        .shop-title span {
+            color: var(--accent-color);
+        }
+        .shop-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 50px;
+        }
+        /* Shop Items Grid Layout */
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .shop-card {
+            background: rgba(var(--card-rgb), 0.6);
+            border: 1px solid rgba(var(--overlay-rgb), 0.04);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .shop-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 25px rgba(255, 74, 87, 0.05);
+        }
+        /* පින්තූරය තියෙන තැන (Placeholder එකක් දාලා තියෙන්නේ) */
+        .item-image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: rgba(var(--overlay-rgb), 0.02);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            color: rgba(255, 74, 87, 0.3);
+            margin-bottom: 20px;
+            border: 1px dashed rgba(var(--overlay-rgb), 0.05);
+        }
+        .shop-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+        .shop-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            height: 45px; /* ලිස්ට් එක එක සමාන උසකට තියාගන්න */
+            overflow: hidden;
+        }
+        .item-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            display: block;
+        }
+        .order-btn {
+            background: transparent;
+            color: var(--text-color);
+            border: 1px solid rgba(var(--overlay-rgb), 0.1);
+            padding: 10px 22px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+        }
+        .shop-card:hover .order-btn {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(255, 74, 87, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark and light mode">
+        <i class="fa-solid fa-moon"></i>
+        <i class="fa-solid fa-sun"></i>
+    </button>
+
+    <div class="shop-page">
+        <div class="shop-container">
+            
+            <!-- ආපසු හැරීමේ බටන් එක -->
+            <a href="../index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+            
+            <h1 class="shop-title">MD <span>Music Shop</span></h1>
+            <p class="shop-subtitle">උසස්ම තත්ත්වයේ දේශීය සහ විදේශීය සංගීත භාණ්ඩ හොඳම මිලට මිලදී ගන්න.</p>
+            
+            <!-- Items Grid -->
+            <div class="shop-grid">
+                
+                <!-- Item 1: Geta Beraya -->
+                <div class="shop-card">
+                    <div class="item-image-placeholder">
+                        <i class="fa-solid fa-drum"></i>
+                    </div>
+                    <h3>Traditional Geta Beraya</h3>
+                    <p>දේශීය ශිල්පීන් විසින් පදම් කළ උසස්ම තත්ත්වයේ ගැට බෙර.</p>
+                    <span class="item-price">Rs. 25,000/=</span>
+                    <a href="../index.html#contact" class="order-btn">Order Now</a>
+                </div>
+
+                <!-- Item 2: Acoustic Guitar -->
+                <div class="shop-card">
+                    <div class="item-image-placeholder">
+                        <i class="fa-solid fa-guitar"></i>
+                    </div>
+                    <h3>Acoustic Guitar</h3>
+                    <p>පටන් ගන්නා අයට සහ ප්‍රවීණයන්ට ගැලපෙන පැහැදිලි නාද රටා සහිත ගිටාර්.</p>
+                    <span class="item-price">Rs. 18,500/=</span>
+                    <a href="../index.html#contact" class="order-btn">Order Now</a>
+                </div>
+
+                <!-- Item 3: Indian Tabla Set -->
+                <div class="shop-card">
+                    <div class="item-image-placeholder">
+                        <i class="fa-solid fa-druming"></i>
+                    </div>
+                    <h3>Indian Tabla Set</h3>
+                    <p>ශ්‍රුති නිවැරදිව තබාගත හැකි උසස් තත්ත්වයේ තබ්ලා යුගල.</p>
+                    <span class="item-price">Rs. 32,000/=</span>
+                    <a href="../index.html#contact" class="order-btn">Order Now</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-socials">
+            <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/94000000000" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <p class="footer-copy">&copy; 2026 M69 G development studio <span class="heart">&hearts;</span>. All Rights Reserved.</p>
+    </footer>
+
+    <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

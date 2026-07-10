@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maduranga | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <style>
+        /* Main page layout unique styles */
+        header {
+            position: fixed; top: 0; width: 100%; background: var(--header-bg);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 1000;
+            padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(var(--overlay-rgb),0.03);
+            transition: var(--theme-transition);
+        }
+        .logo { font-size: 24px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+        .logo span { color: var(--accent-color); }
+        nav a { color: var(--text-color); text-decoration: none; margin-left: 30px; font-weight: 500; transition: 0.3s; }
+        nav a:hover { color: var(--accent-color); }
+
+        .header-right { display: flex; align-items: center; gap: 24px; }
+
+        /* When the toggle sits inside the header it flows with flexbox instead
+           of floating fixed, so it never overlaps the nav links. */
+        .theme-toggle-inline {
+            position: static;
+            width: 40px;
+            height: 40px;
+            box-shadow: none;
+            flex-shrink: 0;
+        }
+        .theme-toggle-inline:hover {
+            box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.3);
+        }
+
+        .hero-split { min-height: 100vh; display: flex; align-items: center; position: relative; padding-top: 80px; }
+        .hero-image-side { width: 50%; height: 100vh; position: relative; display: flex; justify-content: center; align-items: center; padding: 40px; }
+        .image-card-wrapper { position: relative; width: 100%; height: 80%; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        .image-blur-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('BG1.jpg'); background-size: cover; background-position: center; filter: blur(15px) brightness(0.6); transform: scale(1.1); }
+        .image-clear-front { position: absolute; top: 5%; left: 5%; width: 90%; height: 90%; background-image: url('BG1.jpg'); background-size: cover; background-position: center; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); }
+        
+        .hero-text-side { width: 50%; padding: 0 80px; display: flex; flex-direction: column; justify-content: center; }
+        .hero-text-side h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.2; margin-bottom: 15px; }
+        .hero-text-side h1 span { color: var(--accent-color); }
+        .hero-text-side p { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 35px; font-weight: 300; }
+
+        .btn { background-color: var(--accent-color); color: white; padding: 14px 35px; border-radius: 30px; text-decoration: none; font-weight: 600; width: fit-content; transition: 0.3s ease; display: inline-block; }
+
+        section { padding: 100px 50px; max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 2.5rem; text-align: center; margin-bottom: 50px; position: relative; }
+        .section-title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 50px; height: 3px; background-color: var(--accent-color); }
+
+        .about-content { font-size: 1.1rem; color: var(--text-muted); text-align: center; max-width: 800px; margin: 0 auto; background: rgba(var(--card-rgb),0.3); padding: 30px; border-radius: 20px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.02); }
+
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; }
+        .service-link { text-decoration: none; color: inherit; display: block; border-radius: 15px; }
+        .service-card { background-color: var(--card-bg); padding: 40px 30px; border-radius: 15px; text-align: center; border: 1px solid rgba(255,255,255,0.03); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); cursor: pointer; height: 100%; }
+        .service-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(255, 74, 87, 0.15); border-color: rgba(255, 74, 87, 0.3); background-color: rgba(var(--card-hover-rgb), 0.8); }
+        .service-card i { font-size: 40px; color: var(--accent-color); margin-bottom: 20px; transition: 0.3s; }
+        .service-card:hover i { transform: scale(1.1); }
+        .service-card h3 { margin-bottom: 15px; font-size: 1.3rem; }
+        .service-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        .contact-container { text-align: center; background: rgba(var(--card-rgb),0.3); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.02); backdrop-filter: blur(5px); }
+        .social-icons { margin-top: 30px; }
+        .social-icons a { color: var(--text-color); font-size: 30px; margin: 0 15px; transition: 0.3s; display: inline-block; }
+        .social-icons a:hover { color: var(--accent-color); transform: translateY(-3px); }
+        footer { text-align: center; padding: 30px; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.05); }
+
+        @media (max-width: 992px) {
+            .hero-split { flex-direction: column; height: auto; padding-bottom: 60px; }
+            .hero-image-side, .hero-text-side { width: 100%; }
+            .hero-image-side { height: 50vh; padding: 20px; }
+            .hero-text-side { text-align: center; align-items: center; padding: 0 30px; margin-top: 20px; }
+            .hero-text-side h1 { font-size: 2.8rem; }
+            header { padding: 20px; } nav { display: none; } section { padding: 60px 20px; }
+        }
+        @media (max-width: 576px) { .hero-text-side h1 { font-size: 2.3rem; } .service-card { padding: 30px 20px; } }
+    </style>
+</head>
+<body>
+
+    <!-- ලස්සන MUSIC ICON ලෝගෝ එකක් සහිත NEW LOADING SCREEN එක -->
+    <div class="loader-wrapper" id="preloader">
+        <div class="loader-logo-container">
+            <div class="loader-ring"></div>
+            <!-- මැද තියෙන ලෝගෝ අයිකන් එක (සංගීතය නියෝජනය කරන හින්දා Music Note එකක් දැම්මා) -->
+            <i class="fa-solid fa-music"></i>
+        </div>
+        <div class="loader-text">Maduranga<span>.</span></div>
+    </div>
+
+    <div class="ambient-glow"></div>
+    <header>
+        <div class="logo">MADURANGA<span>.</span></div>
+        <div class="header-right">
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">What I Do</a>
+                <a href="pages/my-portraits.html">My Portraits</a>
+                <a href="pages/my-apps.html">My Apps</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <button id="theme-toggle" class="theme-toggle-btn theme-toggle-inline" aria-label="Toggle dark and light mode">
+                <i class="fa-solid fa-moon"></i>
+                <i class="fa-solid fa-sun"></i>
+            </button>
+        </div>
+    </header>
+
+<section id="home" class="hero-section">
+    <div class="hero-container">
+        
+        <div class="hero-image-side">
+            <div class="hero-image-blend-wrapper">
+                <img src="assets/images/BG1.jpg" alt="Maduranga Violinist" class="hero-blend-img">
+                <div class="hero-right-fade"></div>
+                <div class="hero-bottom-fade"></div>
+            </div>
+        </div>
+
+        <div class="hero-text-side">
+            <h5>Hi, I'm</h5>
+            <h1>Maduranga<span>.</span></h1>
+            <p class="hero-subtitle">Violinist | Photographer | Videographer | Video Editor</p>
+            <div class="hero-btn-group">
+                <a href="#contact" class="btn let-connect-btn">Let's Connect</a>
+                <a href="#services" class="view-work-btn">View My Work <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+
+<section id="about" class="custom-about-section">
+    <div class="custom-about-container">
+        
+        <div class="custom-about-text-side">
+            <h2 class="custom-about-title">About <span>Me</span></h2>
+            <p class="custom-about-para">
+                මම මදුරංග. සංගීතය, වයලීන් වාදනය, වෘත්තීය මට්ටමේ ඡායාරූපකරණය (Photography) සහ වීඩියෝ සංස්කරණය (Video Editing) මගේ ජීවිතයේ ප්‍රධානතම කලාවන් කොටසක්. මගේ නිර්මාණශීලී හැකියාවන් තුළින් හැමවිටම උසස් සහ සාර්ථක ප්‍රතිඵලයක් ලබාදීම මගේ අරමුණයි.
+            </p>
+            <div class="custom-about-skills">
+                <span class="custom-skill-tag"><i class="fa-solid fa-music"></i> Music & Violin</span>
+                <span class="custom-skill-tag"><i class="fa-solid fa-camera"></i> Photography</span>
+                <span class="custom-skill-tag"><i class="fa-solid fa-video"></i> Videography</span>
+            </div>
+        </div>
+
+        <div class="custom-about-image-side">
+            <div class="custom-image-mask-wrapper">
+                <img src="assets/images/BG2.jpg" alt="Maduranga" class="custom-blend-img">
+                <div class="custom-bottom-fade"></div>
+                <div class="custom-left-fade"></div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+   <section id="services">
+        <h2 class="section-title">What I Do</h2>
+        <div class="services-grid">
+            <a href="pages/music.html" class="service-link">
+                <div class="service-card">
+                    <i class="fa-solid fa-music"></i>
+                    <h3>Music & Violin</h3>
+                    <p>Violin covers, instrumental tracks, and digital audio production.</p>
+                </div>
+            </a>
+            <a href="pages/photography.html" class="service-link">
+                <div class="service-card">
+                    <i class="fa-solid fa-camera"></i>
+                    <h3>Photography</h3>
+                    <p>Professional portraits, event photography, and creative concepts.</p>
+                </div>
+            </a>
+            <a href="pages/videography.html" class="service-link">
+                <div class="service-card">
+                    <i class="fa-solid fa-video"></i>
+                    <h3>Videography</h3>
+                    <p>Cinematic event coverage, short films, and high-quality raw footage.</p>
+                </div>
+            </a>
+<!-- වීඩියෝ එඩිටින් කාඩ් එක (ඔයාගේ පරණ එකේ අවසානය) -->
+        <a href="pages/video-editing.html" class="service-link">
+            <div class="service-card">
+                <i class="fa-solid fa-film"></i>
+                <h3>Video Editing</h3>
+                <p>Dynamic cuts, transitions, color grading, and social media edits.</p>
+            </div>
+        </a>
+
+        <!-- 🚀 අලුත් Web & App Development කාඩ් එක (හරියටම Container එක ඇතුලට ආවේ මෙහෙමයි) -->
+        <a href="pages/my-development.html" class="service-link">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <h3>Web & App Development</h3>
+                <p>Modern UI/UX Designs සහ පිරිසිදු කෝඩින් (HTML, CSS, Flutter) මඟින් ඔයාට අවශ්‍ය Desktop, Mobile හෝ Web සේවා සපයා දීම.</p>
+            </div>
+        </a>
+<!-- 🚀 What I Do සෙක්ෂන් එකට එකතු කරන්න: Music Shop Card -->
+<a href="pages/music-shop.html" class="service-link">
+    <div class="service-card">
+        <div class="service-icon">
+            <i class="fa-solid fa-guitar"></i> <!-- Music Instrument Icon එක -->
+        </div>
+        <h3>MD Music Shop</h3>
+        <p>උසස්ම තත්ත්වයේ දේශීය සහ විදේශීය සංගීත භාණ්ඩ (Geta Beraya, Tabla, Violins, Guitars) සහ උපාංග සාධාරණ මිල ගණන් යටතේ ලබාගැනීමට.</p>
+    </div>
+</a>
+
+<!-- 🚀 What I Do සෙක්ෂන් එකට එකතු කරන්න: Music Class Card -->
+<a href="pages/music-class.html" class="service-link">
+    <div class="service-card">
+        <div class="service-icon">
+            <i class="fa-solid fa-music"></i> <!-- Music Note Icon එක -->
+        </div>
+        <h3>MD Music Academy</h3>
+        <p>වයලීනය (Violin), තබ්ලාව (Tabla) සහ දේශීය බෙර වාදනය මුල සිට සරලව, ප්‍රායෝගික සහ සිද්ධාන්තිකව (Theory) ඉගෙන ගැනීමට ඇති හොඳම පංතිය.</p>
+    </div>
+</a>
+
+
+<!-- 🚀 What I Do සෙක්ෂන් එකේ කලින් ඩිවලොප්මන්ට් කාඩ් එක වෙනුවට මේක දාන්න -->
+<a href="pages/my-apps.html" class="service-link">
+    <div class="service-card">
+        <div class="service-icon">
+            <i class="fa-solid fa-cubes"></i> <!-- Apps Icon එක -->
+        </div>
+        <h3>My Apps & Tools</h3>
+        <p>සංගීත කටයුතු සහ එදිනෙදා වැඩ පහසු කරගැනීම සඳහා මා විසින්ම කෝඩ් කර නිර්මාණය කරන ලද සජීවී Web Apps සහ Tools එකතුව.</p>
+    </div>
+</a>
+
+
+
+
+    </div>
+
+
+
+
+ <!-- 👈 සර්විස් කාඩ් ඔක්කොම එකතු කරන ප්‍රධාන Div එක වැහෙන්නේ මෙතනින් -->
+</section>
+
+
+
+
+
+
+
+
+<!-- ================= 🚀 CUSTOM CONTACT SECTION ================= -->
+<section id="contact" class="custom-contact-section">
+    <div class="custom-contact-container">
+        
+        <!-- වම් පැත්ත: Contact Info & Socials -->
+        <div class="contact-info-side">
+            <h2 class="section-title">Get In <span>Touch</span></h2>
+            <p class="contact-desc">ඔයාගේ ඊළඟ Project එක (Photography, Music, Video Editing) වෙනුවෙන් මාව සම්බන්ධ කරගන්න කැමතිද? පහත ක්‍රම මඟින් හෝ පණිවිඩයක් එවන්න.</p>
+            
+            <div class="contact-details">
+                <div class="info-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <div>
+                        <h4>Email Me</h4>
+                        <p>info@msd.com</p> <!-- ඔයාගේ Email එක මෙතනට දාන්න -->
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <h4>Location</h4>
+                        <p>Ibbagamuwa, Sri Lanka</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Media Buttons -->
+            <div class="contact-socials">
+                <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://wa.me/94000000000" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+
+        <!-- දකුණු පැත්ත: Animated Contact Form -->
+        <div class="contact-form-side">
+            <form class="custom-contact-form">
+                <div class="input-group">
+                    <input type="text" required placeholder=" ">
+                    <label>Your Name</label>
+                </div>
+                <div class="input-group">
+                    <input type="email" required placeholder=" ">
+                    <label>Your Email</label>
+                </div>
+                <div class="input-group">
+                    <textarea rows="5" required placeholder=" "></textarea>
+                    <label>Your Message</label>
+                </div>
+                <button type="submit" class="btn contact-submit-btn">Send Message <i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+
+
+
+    <footer class="site-footer">
+        <div class="footer-socials">
+            <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/94000000000" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <p class="footer-copy">&copy; 2026 M69 G development studio <span class="heart">&hearts;</span>. All Rights Reserved.</p>
+    </footer>
+
+    <script src="assets/js/main.js" defer></script>
+</body>
+</html>
